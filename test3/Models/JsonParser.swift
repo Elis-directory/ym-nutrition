@@ -1,11 +1,8 @@
-//
 //  JsonParser.swift
-//  test3
-//
-//  Created by Eliran Chomoshe on 7/5/24.
-//
+//  Created by EC on 7/5/24.
+//  Parses and augments JSON data into decoded format
+//  Enabling data to be used with swift language
 
-// JsonParser.swift
 import Foundation
 
 func parseJsonData() -> [Food] {

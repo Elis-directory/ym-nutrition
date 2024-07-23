@@ -9,55 +9,88 @@ import SwiftUI
 
 struct RecentlyViewedView: View {
     @State private var foods: [Food] = parseJsonData()
+    @State private var collapsed: Bool = false
+    @Binding var darkModeState: Bool
     
     var body: some View {
         
         NavigationView {
         ZStack {
-            BackgroundView(topColor: Color.orange, bottomColor: Color.pink)
-                .ignoresSafeArea(.all)
            
-            List(foods) { food in
+            displayBackground(darkMode: darkModeState)
+           
+            List($foods) { food in
                     HStack {
-//                        AsyncImage(url: URL(string: food.imageUrl)) { image in
-//                            image
-//                                .resizable()
-//                                .aspectRatio(contentMode: .fill)
-//                                .frame(width: 50, height: 50)
-//                                .clipped()
-//                        } placeholder: {
-//                            //ProgressView()
-//                        }
-                        
-                        VStack(alignment: .leading) {
-                            Text(food.name)
-                                .font(.headline)
-                                
-                            Text(food.subtitle)
-                                .font(.subheadline)
-                                .foregroundColor(.white)
-                        }
-//                        .onTapGesture {
-//                               var selectedItemId = food.id // selects the tapped item
-//                               print("Item tapped: \(food.name)")
-//                           }
+                        ModalView(isExpanded: collapsed, food: food)
+ 
                     }
-                    .listRowBackground(Color.clear) // Make row background transparent
-                   
-                }
-                .listStyle(PlainListStyle()) // Use plain list style
-                .background(Color.clear) // Set list background to transparent
-                //.navigationTitle("Recently Viewed Foods")
+                    .listRowBackground(Color.clear)
             }
-            .background(Color.clear) // Set navigation view background to transparent
+            .listStyle(PlainListStyle())
+            .background(Color.clear)
+    
+            }
+            .background(Color.clear)
         }
     }
 }
 
 
 
+struct ModalView: View {
+    @State var isExpanded: Bool
+    @Binding var food: Food
 
-
-#Preview {
-    RecentlyViewedView()
+    var body: some View {
+       
+        VStack {
+            if !isExpanded {
+                collapsed()
+                
+            } else {
+              expanded()
+            }
+        }
+            .onTapGesture {
+                isExpanded.toggle()
+            }
+    }
+    
+    func collapsed() -> some View {
+        VStack(alignment: .leading) {
+            Text(food.name)
+                .font(.title2)
+                .foregroundStyle(.white)
+                .bold()
+            Text(food.subtitle)
+                .font(.callout)
+                .foregroundStyle(.white)
+           
+        }
+    }
+    
+    func expanded() -> some View {
+        VStack(alignment: .leading) {
+            Text(food.name)
+                .font(.title2)
+                .foregroundStyle(.white)
+                .bold()
+            Text(food.subtitle)
+                .font(.callout)
+                .foregroundStyle(.white)
+            Text(food.description)
+                .font(.callout)
+                .foregroundStyle(.white)
+                .multilineTextAlignment(.leading)
+        }
+    }
+    
+    
 }
+
+//#Preview {
+//    RecentlyViewedView()
+//}
+
+
+

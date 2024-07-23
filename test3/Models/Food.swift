@@ -1,9 +1,5 @@
-//
 //  Food.swift
-//  test3
-//
-//  Created by Eliran Chomoshe on 7/5/24.
-//
+//  Represents Food object and associated attributes
 
 import Foundation
 
@@ -15,5 +11,7 @@ struct Food: Identifiable, Codable {
     let subtitle: String
     var foods: [Food]?
     var isExpanded: Bool?
+    
+    
 }
 
