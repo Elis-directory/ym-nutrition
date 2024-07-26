@@ -42,18 +42,29 @@ struct ModalView: View {
     @Binding var food: Food
 
     var body: some View {
-       
-        VStack {
-            if !isExpanded {
-                collapsed()
-                
-            } else {
-              expanded()
-            }
+        
+        ZStack(alignment: .leading) {
+           
+            RoundedRectangle(cornerSize: CGSize(width: 20, height: 10))
+                .fill(.clear)
+                .contentShape(Rectangle())
+                .frame(maxWidth: .infinity, minHeight: 10)
+                .onTapGesture {
+                    isExpanded.toggle()
+                }
+            
+                if !isExpanded {
+                    collapsed()
+                    
+                } else {
+                    expanded()
+                }
+         
+            
+          
+            
         }
-            .onTapGesture {
-                isExpanded.toggle()
-            }
+        
     }
     
     func collapsed() -> some View {
