@@ -16,18 +16,16 @@ struct NavPicker: View {
     
     var body: some View {
         ZStack {
-//            BackgroundView(topColor: Color(#colorLiteral(red: 1, green: 0.3674627756, blue: 0.4217120597, alpha: 1)), bottomColor: Color(#colorLiteral(red: 1, green: 0.3817736742, blue: 0.1692351516, alpha: 1)))
-//            .ignoresSafeArea(.all)
             displayBackground(darkMode: darkModeState)
             switch currentView {
           
             case .homePage:
                 NavBar(isShowingImagePicker: $isShowingImagePicker, image: $image, currentView: $currentView, darkModeState: $darkModeState)
-                
             case .photoPage:
                 AnalzyeButtonView(currentView: $currentView, darkModeState: $darkModeState)
-              
             case .settingsPage:
+                NavBar(isShowingImagePicker: $isShowingImagePicker, image: $image, currentView: $currentView, darkModeState: $darkModeState)
+            case .analysisPage:
                 NavBar(isShowingImagePicker: $isShowingImagePicker, image: $image, currentView: $currentView, darkModeState: $darkModeState)
             }
         }
@@ -40,7 +38,6 @@ struct NavPicker: View {
 struct NavBar: View {
    
    @Binding var isShowingImagePicker: Bool
-//    @State var isShowingImagePicker: Bool = false
     @Binding var image: UIImage?
     @Binding var currentView: CurrentPageView
     @Binding var darkModeState: Bool
@@ -95,18 +92,20 @@ struct AnalzyeButtonView: View {
     var body: some View {
         
         Button(action: {
+            withAnimation(.easeOut(duration: 1.25)) {
+                currentView = .analysisPage
+            }
             
-            currentView = .homePage
         },
                label: {
             ZStack {
-                RoundedRectangle(cornerRadius: 25.0)
-                    .stroke(darkModeState ? .black : .yellow, lineWidth: 5)
-                    .fill(darkModeState ? .white : .red)
+                RoundedRectangle(cornerRadius: 20.0)
+                    .stroke(darkModeState ? .gray : .red, lineWidth: 5)
+                    .fill(darkModeState ? .white : .yellow)
                 .frame(width: 200, height: 50)
                 Text("Analyze")
                     .font(.headline)
-                    .foregroundStyle(darkModeState ? .black :.yellow)
+                    .foregroundStyle(darkModeState ? .gray : .red)
                     .fontWeight(.semibold)
                 
             }

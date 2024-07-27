@@ -5,7 +5,6 @@
 //  Created by Eliran Chomoshe on 7/7/24.
 //
 
-import Foundation
 import SwiftUI
 import UIKit
 
@@ -39,7 +38,13 @@ struct ImagePicker: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let picker = UIImagePickerController()
         picker.delegate = context.coordinator
-        picker.sourceType = .camera
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            picker.sourceType = .camera
+        } else {
+            picker.sourceType = .photoLibrary
+        }
+        
         return picker
     }
 

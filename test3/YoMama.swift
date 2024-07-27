@@ -31,7 +31,8 @@ struct YoMama: View {
                         
                     }
                     
-                  
+                    case .analysisPage:
+                        InformationView(darkModeState: $darkModeState)
                 }
                 
                 NavPicker(isShowingImagePicker: $isShowingImagePicker, image: $image, currentView: $currentView, darkModeState: $darkModeState)

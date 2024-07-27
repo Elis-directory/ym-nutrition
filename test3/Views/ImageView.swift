@@ -22,7 +22,7 @@ struct ImageView: View {
             
             
             RoundedRectangle(cornerRadius: 15.0)
-                .stroke(darkModeState ? .black : .yellow, lineWidth: 6)
+                .stroke(darkModeState ? .gray : .yellow, lineWidth: 6)
                 .frame(width: 270, height: 360)
             
             

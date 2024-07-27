@@ -14,6 +14,7 @@ struct TitlesView: View {
     var homePageTitle = "Yo Mama Nutrition"
     var settingsTitle = "Settings"
     var photoTakenTitle = "Gallery"
+    var analysisTitle = "Analysis"
     
     var body: some View {
         
@@ -38,6 +39,12 @@ struct TitlesView: View {
                     .foregroundStyle(.white)
                     .padding()
             
+            case .analysisPage:
+                Text(analysisTitle)
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.white)
+                    .padding()
         }
        
     }

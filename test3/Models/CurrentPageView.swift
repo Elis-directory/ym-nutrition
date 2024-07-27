@@ -7,4 +7,5 @@ enum CurrentPageView {
     case homePage
     case settingsPage
     case photoPage
+    case analysisPage
 }
